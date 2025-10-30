@@ -1,30 +1,29 @@
-# minecraft-threejs
+# Sofast Plugin – Minecraft Demo
 
-English ｜ [中文](https://github.com/vyse12138/minecraft-threejs/blob/main/README_ZH.md)
+English ｜ [中文](./README_ZH.md)
 
-Minecraft clone made with Three.js and TypeScript
+This is a Sofast plugin example that embeds a Minecraft-like Three.js game into Sofast. It is adapted from the open‑source project “minecraft-threejs” by Yulei Zhu (MIT).
 
-Check it out: [Minecraft - Three.js](https://mc.yulei.me/)
+What this example shows
 
-Recommend to use Chrome to get the best experience
+- How to package a pure Vite + TypeScript app as a Sofast plugin
+- How to expose commands via `package.json` so Sofast can discover it
+- How to make assets and styles work in both dev and packaged modes
+- Input handling in embedded environments (pointer lock fallback, key capture)
 
-![preview](https://user-images.githubusercontent.com/88306344/154383952-9b33bad4-eebb-4a98-a12e-f5f137422d06.gif)
+Scripts
 
-## Features:
+- `pnpm dev` – start Vite dev server for quick iteration
+- `pnpm build` – build UI to `dist/` and copy `package.json` for Sofast discovery
+- `pnpm preview` – preview the production build
 
-- Destroy block and place block
-- Mouse wheel (or number key) to select different block types
-- Movement and collision detection
-- Random terrain / blocks / tree generations
-- Infinite world
-- Game save / load
-- Sound effect and BGM
-- Highlight the block at crosshair
-- Basic UI and settings
-- Mobile friendly
+Use in Sofast
 
-## Working on:
+1) Build the plugin: `pnpm -C examples/plugins/sofast-minecraft build`
+2) Open Sofast and run the command named “Minecraft” (declared in this plugin’s `package.json` under `commands`).
 
-- Multiplayer
-- Generates water
-- Higher performance algorithm
+Notes
+
+- Pointer lock is optional. When unavailable, the plugin falls back to mouse‑move camera.
+- Assets are referenced relatively so they load correctly inside Sofast.
+- Original upstream: https://github.com/Vyse12138/minecraft-threejs (MIT)
