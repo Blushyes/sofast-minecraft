@@ -1,6 +1,6 @@
 # 如快 插件示例 – Minecraft
 
-中文 ｜ [English](./README_EN.md)
+中文 ｜ [English](./README_en.md)
 
 这是一个如快的插件示例，将基于 Three.js 的“我的世界”玩法嵌入如快。项目改编自开源仓库 “minecraft-threejs”（作者 Yulei Zhu，许可 MIT），并做了适配以便在如快的嵌入环境中稳定运行。
 
@@ -19,8 +19,8 @@
 
 在如快中使用
 
-1) 构建插件：`pnpm -C examples/plugins/sofast-minecraft build`
-2) 打开如快，在命令面板搜索并运行“Minecraft”（在本插件 `package.json` 的 `commands` 中声明）。
+1. 构建插件：`pnpm -C examples/plugins/sofast-minecraft build`
+2. 打开如快，在命令面板搜索并运行“Minecraft”（在本插件 `package.json` 的 `commands` 中声明）。
 
 注意
 
