@@ -52,6 +52,7 @@ export default class Core {
   initRenderer = () => {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
+    ;(this.renderer.domElement as HTMLCanvasElement).tabIndex = 0
 
     window.addEventListener('resize', () => {
       this.renderer.setSize(window.innerWidth, window.innerHeight)
