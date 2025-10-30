@@ -28,7 +28,8 @@ export default class Control {
     this.camera = camera
     this.player = player
     this.terrain = terrain
-    this.control = new PointerLockControls(camera, document.body)
+    const domEl = (document.querySelector('canvas') as HTMLElement) || document.body
+    this.control = new PointerLockControls(camera, domEl)
     this.audio = audio
 
     this.raycaster = new THREE.Raycaster()
@@ -488,28 +489,34 @@ export default class Control {
     // add / remove handler when pointer lock / unlock
     document.addEventListener('pointerlockchange', () => {
       if (document.pointerLockElement) {
-        document.body.addEventListener(
+        document.addEventListener(
           'keydown',
           this.changeHoldingBlockHandler
         )
-        document.body.addEventListener('wheel', this.wheelHandler)
-        document.body.addEventListener('keydown', this.setMovementHandler)
-        document.body.addEventListener('keyup', this.resetMovementHandler)
-        document.body.addEventListener('mousedown', this.mousedownHandler)
-        document.body.addEventListener('mouseup', this.mouseupHandler)
+        document.addEventListener('wheel', this.wheelHandler)
+        document.addEventListener('keydown', this.setMovementHandler)
+        document.addEventListener('keyup', this.resetMovementHandler)
+        document.addEventListener('mousedown', this.mousedownHandler)
+        document.addEventListener('mouseup', this.mouseupHandler)
       } else {
-        document.body.removeEventListener(
+        document.removeEventListener(
           'keydown',
           this.changeHoldingBlockHandler
         )
-        document.body.removeEventListener('wheel', this.wheelHandler)
-        document.body.removeEventListener('keydown', this.setMovementHandler)
-        document.body.removeEventListener('keyup', this.resetMovementHandler)
-        document.body.removeEventListener('mousedown', this.mousedownHandler)
-        document.body.removeEventListener('mouseup', this.mouseupHandler)
+        document.removeEventListener('wheel', this.wheelHandler)
+        document.removeEventListener('keydown', this.setMovementHandler)
+        document.removeEventListener('keyup', this.resetMovementHandler)
+        document.removeEventListener('mousedown', this.mousedownHandler)
+        document.removeEventListener('mouseup', this.mouseupHandler)
         this.velocity = new THREE.Vector3(0, 0, 0)
       }
     })
+    // If pointer lock fails (e.g. in embedded environments), ensure movement keys still work
+    // by attaching once globally. Handlers themselves are lightweight and guard on repeat.
+    document.addEventListener('keydown', this.changeHoldingBlockHandler)
+    document.addEventListener('wheel', this.wheelHandler)
+    document.addEventListener('keydown', this.setMovementHandler)
+    document.addEventListener('keyup', this.resetMovementHandler)
   }
 
   // move along X with direction factor

@@ -5,7 +5,6 @@ import Terrain from './terrain'
 import UI from './ui'
 import Audio from './audio'
 
-import './style.css'
 
 const core = new Core()
 const camera = core.camera
